@@ -1,4 +1,5 @@
-export const BASE_URL = 'http://localhost:3000';
+// export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'http://api.northsky.students.nomoreparties.co';
 
 const checkResponse = (res) => {
 	if (res.ok) {

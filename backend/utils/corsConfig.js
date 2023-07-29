@@ -1,4 +1,6 @@
 const allowedCors = [
+  'http://northsky.students.nomoreparties.co',
+  'http://api.northsky.students.nomoreparties.co',
   'http://localhost:3001',
 ];
 

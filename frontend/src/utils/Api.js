@@ -75,7 +75,7 @@ class Api {
 const token = localStorage.getItem('token');
 
 const api = new Api({
-	baseUrl: 'http://localhost:3000',
+	baseUrl: 'http://api.northsky.students.nomoreparties.co',
 	headers: {
 		authorization: `Bearer ${token}`,
 		'Content-Type': 'application/json'
