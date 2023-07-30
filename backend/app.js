@@ -33,11 +33,6 @@ app.use(requestLogger);
 app.use(corsHandler);
 app.use(limiter);
 app.use(bodyParser.json());
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
 app.use('/users', auth, usersRouter);
 app.use('/cards', auth, cardsRouter);
 app.post('/signup', validateUserInfo, createUser);
