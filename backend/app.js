@@ -15,13 +15,14 @@ const errorHandler = require('./middlewares/error-handler');
 const NotFoundError = require('./errors/not-found-err');
 const rateLimit = require('express-rate-limit');
 const { corsHandler } = require('./middlewares/corsHandler');
+const { DB_ADDRESS } = require('./config');
 
 const app = express();
 app.use(helmet());
 app.use(cors());
 
 const { PORT = 3000 } = process.env;
-mongoose.connect(process.env.DB_ADDRESS);
+mongoose.connect(DB_ADDRESS);
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,

@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const NotAuth = require('../errors/not-auth');
+const { JWT_SECRET } = require('../config')
 
 const auth = (req, res, next) => {
   const { authorization } = req.headers;

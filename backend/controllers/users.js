@@ -5,6 +5,7 @@ const BadRequest = require('../errors/bad-request');
 const NotFound = require('../errors/not-found-err');
 const Conflict = require('../errors/conflict-err');
 const NotAuth = require('../errors/not-auth');
+const { JWT_SECRET } = require('../config')
 
 const createUser = (req, res, next) => {
   const { name, about, avatar, email, password } = req.body;
@@ -153,5 +154,5 @@ module.exports = {
   getAuthUser,
   getUsers,
   updateUser,
-  updateAvatar,
+  updateAvatar
 };
