@@ -6,8 +6,6 @@ const NotFound = require('../errors/not-found-err');
 const Conflict = require('../errors/conflict-err');
 const NotAuth = require('../errors/not-auth');
 
-const JWT_SECRET = 'secret-code';
-
 const createUser = (req, res, next) => {
   const { name, about, avatar, email, password } = req.body;
   if (!email || !password) {
@@ -50,7 +48,7 @@ const login = (req, res, next) => {
         if (!isValidPassword) {
           return next(new NotAuth('Неправильные почта или пароль'));
         }
-        const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+        const token = jwt.sign({ _id: user._id }, process.env.NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
         res.send({ token });
       })
     })
