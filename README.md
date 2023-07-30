@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.65.24
+IP  158.160.65.24
 
 Frontend https://northsky.students.nomoreparties.co
 
