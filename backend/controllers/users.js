@@ -154,5 +154,4 @@ module.exports = {
   getUsers,
   updateUser,
   updateAvatar,
-  JWT_SECRET
 };
