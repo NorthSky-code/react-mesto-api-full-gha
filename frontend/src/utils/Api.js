@@ -78,6 +78,7 @@ const api = new Api({
 	baseUrl: 'http://api.northsky.students.nomoreparties.co',
 	headers: {
 		authorization: `Bearer ${token}`,
+		'Accept': 'application/json',
 		'Content-Type': 'application/json'
 	}
 });

@@ -1,5 +1,5 @@
-// export const BASE_URL = 'http://localhost:3000';
 export const BASE_URL = 'http://api.northsky.students.nomoreparties.co';
+//export const BASE_URL = 'http://localhost:3000'
 
 const checkResponse = (res) => {
 	if (res.ok) {
@@ -12,6 +12,7 @@ export const register = (email, password) => {
 	return fetch(`${BASE_URL}/signup`, {
 		method: 'POST',
 		headers: {
+			'Accept': 'application/json',
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({ email, password }),
@@ -35,6 +36,7 @@ export const getContent = (token) => {
 		method: 'GET',
 		headers: {
 			'Authorization': `Bearer ${token}`,
+			'Accept': 'application/json',
 			'Content-Type': 'application/json',
 		},
 	})
