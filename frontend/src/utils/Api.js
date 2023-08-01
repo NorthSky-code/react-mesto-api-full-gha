@@ -1,7 +1,6 @@
 class Api {
-	constructor(options) {
-		this._baseUrl = options.baseUrl;
-		this._headers = options.headers;
+	constructor({ baseUrl }) {
+		this._baseUrl = baseUrl;
 	}
 
 	_responseOutput(res) {
@@ -13,21 +12,32 @@ class Api {
 
 
 	getInfoProfile() {
+		const token = localStorage.getItem('token');
 		return fetch(`${this._baseUrl}/users/me`, {
-			headers: this._headers
+			headers: {
+				authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json'
+			}
 		}).then(this._responseOutput)
 	}
 
 	getInitialCards() {
+		const token = localStorage.getItem('token');
 		return fetch(`${this._baseUrl}/cards`, {
-			headers: this._headers
+			headers: {
+				authorization: `Bearer ${token}`,
+			}
 		}).then(this._responseOutput)
 	}
 
 	editInfoProfile({ name, about }) {
+		const token = localStorage.getItem('token');
 		return fetch(`${this._baseUrl}/users/me`, {
 			method: 'PATCH',
-			headers: this._headers,
+			headers: {
+				authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json'
+			},
 			body: JSON.stringify({
 				name,
 				about
@@ -36,9 +46,13 @@ class Api {
 	}
 
 	addCard({ name, link }) {
+		const token = localStorage.getItem('token');
 		return fetch(`${this._baseUrl}/cards`, {
 			method: 'POST',
-			headers: this._headers,
+			headers: {
+				authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json'
+			},
 			body: JSON.stringify({
 				name,
 				link
@@ -47,9 +61,13 @@ class Api {
 	}
 
 	editProfileAvatar({ avatar }) {
+		const token = localStorage.getItem('token');
 		return fetch(`${this._baseUrl}/users/me/avatar`, {
 			method: 'PATCH',
-			headers: this._headers,
+			headers: {
+				authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json'
+			},
 			body: JSON.stringify({
 				avatar,
 			})
@@ -57,30 +75,30 @@ class Api {
 	}
 
 	deleteCard(cardId) {
+		const token = localStorage.getItem('token');
 		return fetch(`${this._baseUrl}/cards/${cardId}`, {
 			method: 'DELETE',
-			headers: this._headers,
+			headers: {
+				authorization: `Bearer ${token}`,
+			}
 		}).then(this._responseOutput)
 	}
 
 	changeLikeCardStatus(id, isLiked) {
+		const token = localStorage.getItem('token');
 		return fetch(`${this._baseUrl}/cards/${id}/likes`, {
 			method: isLiked ? 'PUT' : 'DELETE',
-			headers: this._headers,
+			headers: {
+				authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json'
+			}
 		}).then(this._responseOutput)
 	}
 
 }
 
-const token = localStorage.getItem('token');
-
 const api = new Api({
 	baseUrl: 'https://api.northsky.students.nomoreparties.co',
-	headers: {
-		authorization: `Bearer ${token}`,
-		'Accept': 'application/json',
-		'Content-Type': 'application/json'
-	}
 });
 
 export default api;

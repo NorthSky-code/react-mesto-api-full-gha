@@ -83,6 +83,9 @@ function App() {
 				}
 			})
 			.catch((err) => {
+				setIsInfoTooltipPopup(true);
+				setIsInfoTooltipImage(false);
+				setIsInfoTooltipMessage('Что-то пошло не так! Попробуйте ещё раз.');
 				console.log(err);
 			})
 			.finally(() => {
@@ -164,24 +167,13 @@ function App() {
 	}
 
 	useEffect(() => {
-		api.getInfoProfile().then(
-			(data) => {
-				setCurrentUser(data);
+		loggedIn && Promise.all([api.getInfoProfile(), api.getInitialCards()])
+			.then(([data, dataCard]) => {
+				setCurrentUser(data)
+				setCards(dataCard)
 			})
-			.catch((err) => {
-				console.log(err)
-			})
-	}, [setCurrentUser]);
-
-	useEffect(() => {
-		api.getInitialCards().then(
-			(dataCard) => {
-				setCards(dataCard);
-			})
-			.catch((err) => {
-				console.log(err)
-			})
-	}, []);
+			.catch(console.log)
+	}, [loggedIn])
 
 	useEffect(() => {
 		tokenCheck()
